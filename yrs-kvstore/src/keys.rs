@@ -149,10 +149,3 @@ impl<const N: usize> Into<Vec<u8>> for Key<N> {
         self.0.to_vec()
     }
 }
-
-//impl<const N: usize> ToMdbValue for Key<N> {
-//    fn to_mdb_value(&self) -> MdbValue {
-//        let bytes = self.0.as_ptr() as *const c_void;
-//        unsafe { MdbValue::new(bytes, self.0.len()) }
-//    }
-//}

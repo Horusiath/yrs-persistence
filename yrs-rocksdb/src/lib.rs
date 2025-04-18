@@ -215,13 +215,13 @@ impl KVEntry for RocksDBEntry {
 
 #[cfg(test)]
 mod test {
+    use crate::store::yrs::{Doc, GetString, ReadTxn, Text, Transact};
+    use crate::store::DocOps;
     use crate::RocksDBStore;
     use rocksdb::TransactionDB;
     use std::path::Path;
     use std::sync::Arc;
-    use tempdir::TempDir;
-    use crate::store::yrs::{Doc, GetString, ReadTxn, Text, Transact};
-    use crate::store::DocOps;
+    use tempfile::tempdir;
 
     fn init_env<P: AsRef<Path>>(dir: P) -> TransactionDB {
         let db = TransactionDB::open_default(dir).unwrap();
@@ -230,7 +230,7 @@ mod test {
 
     #[test]
     fn create_get_remove() {
-        let tmp = TempDir::new("rocksdb-create_get_remove").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
 
         // insert document
@@ -280,7 +280,7 @@ mod test {
     }
     #[test]
     fn multi_insert() {
-        let tmp = TempDir::new("rocksdb-multi_insert").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
 
         // insert document twice
@@ -316,7 +316,7 @@ mod test {
     #[test]
     fn incremental_updates() {
         const DOC_NAME: &str = "doc";
-        let tmp = TempDir::new("rocksdb-incremental_updates").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db = Arc::new(db);
 
@@ -364,7 +364,7 @@ mod test {
     #[test]
     fn state_vector_updates_only() {
         const DOC_NAME: &str = "doc";
-        let tmp = TempDir::new("rocksdb-state_vector_updates_only").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db = Arc::new(db);
 
@@ -396,7 +396,7 @@ mod test {
     #[test]
     fn state_diff_from_updates() {
         const DOC_NAME: &str = "doc";
-        let tmp = TempDir::new("rocksdb-state_diff_from_updates").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db = Arc::new(db);
 
@@ -428,7 +428,7 @@ mod test {
     #[test]
     fn state_diff_from_doc() {
         const DOC_NAME: &str = "doc";
-        let tmp = TempDir::new("rocksdb-state_diff_from_doc").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db = Arc::new(db);
 
@@ -457,7 +457,7 @@ mod test {
     #[test]
     fn doc_meta() {
         const DOC_NAME: &str = "doc";
-        let tmp = TempDir::new("rocksdb-doc_meta").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db = Arc::new(db);
 
@@ -487,7 +487,7 @@ mod test {
 
     #[test]
     fn doc_meta_iter() {
-        let tmp = TempDir::new("rocksdb-doc_meta_iter").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db_txn = RocksDBStore::from(db.transaction());
 
@@ -504,7 +504,7 @@ mod test {
 
     #[test]
     fn doc_iter() {
-        let tmp = TempDir::new("rocksdb-doc_iter").unwrap();
+        let tmp = tempdir().unwrap();
         let db = init_env(&tmp);
         let db = Arc::new(db);
 

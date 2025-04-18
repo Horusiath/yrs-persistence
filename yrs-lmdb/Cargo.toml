@@ -14,11 +14,11 @@ readme = "./README.md"
 
 [dependencies]
 yrs-kvstore = { version = "0.3", path = "../yrs-kvstore" }
-lmdb-rs = { version = "0.7" }
+lmdb-rs = { version = "0.7.6" }
 
 [dev-dependencies]
 criterion = "0.5"
-tempdir = "0.3"
+tempfile = "3.19"
 
 [[bench]]
 name = "benches"

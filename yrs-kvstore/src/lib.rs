@@ -411,7 +411,7 @@ where
         let doc_key = key_doc(oid);
         if let Some(doc_state) = db.get(&doc_key)? {
             let update = Update::decode_v1(doc_state.as_ref())?;
-            txn.apply_update(update);
+            txn.apply_update(update)?;
             found = true;
         }
     }
@@ -423,7 +423,7 @@ where
         while let Some(e) = iter.next() {
             let value = e.value();
             let update = Update::decode_v1(value)?;
-            txn.apply_update(update);
+            txn.apply_update(update)?;
             update_count += 1;
         }
     }

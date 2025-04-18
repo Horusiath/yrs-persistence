@@ -18,7 +18,7 @@ rocksdb = { version = "0.23" }
 
 [dev-dependencies]
 criterion = "0.5"
-tempdir = "0.3"
+tempfile = "3.19"
 
 [[bench]]
 name = "benches"

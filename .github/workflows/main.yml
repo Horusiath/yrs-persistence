@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [ macos-latest, ubuntu-latest ]
 
     steps:
 
@@ -30,25 +30,22 @@ jobs:
       - name: build default
         run: cargo build --verbose --release
 
-      #- name: build --feature lib0-serde
-      #  run: cargo build --verbose --features lib0-serde
-
-  test-linux:
-    runs-on: ubuntu-latest
+  test-lmdb:
+    runs-on: ${{ matrix.os }}
     needs: build
     steps:
       - name: checkout sources
         uses: actions/checkout@v2
 
       - name: test
-        run: cargo test --release
+        run: cargo test --release -p yrs-lmdb --lib
 
-  test-macos:
-    runs-on: macos-latest
+  test-rocksdb:
+    runs-on: ${{ matrix.os }}
     needs: build
     steps:
       - name: checkout sources
         uses: actions/checkout@v2
 
       - name: test
-        run: cargo test --release
+        run: cargo test --release -p yrs-rocksdb --lib

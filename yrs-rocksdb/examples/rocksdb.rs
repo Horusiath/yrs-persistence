@@ -1,39 +1,14 @@
 use rocksdb::TransactionDB;
 use std::sync::Arc;
 use std::time::Instant;
+use yrs_kvstore::DocOps;
 use yrs_rocksdb::store::yrs::encoding::read::{Cursor, Read};
 use yrs_rocksdb::store::yrs::{Doc, Text, Transact};
-use yrs_kvstore::DocOps;
 use yrs_rocksdb::RocksDBStore;
 
-struct Cleaner(&'static str);
-
-impl Cleaner {
-    fn new(dir: &'static str) -> Self {
-        Self::cleanup(dir);
-        Cleaner(dir)
-    }
-
-    fn dir(&self) -> &str {
-        self.0
-    }
-
-    fn cleanup(dir: &str) {
-        if let Err(_) = std::fs::remove_dir_all(dir) {
-            // if dir doesn't exists, ignore
-        }
-    }
-}
-
-impl Drop for Cleaner {
-    fn drop(&mut self) {
-        Self::cleanup(self.dir());
-    }
-}
-
 fn main() {
-    let cleaner = Cleaner::new("example-rocksdb");
-    let db: TransactionDB = TransactionDB::open_default(cleaner.dir()).unwrap();
+    let dir = tempfile::tempdir().unwrap();
+    let db: TransactionDB = TransactionDB::open_default(&dir).unwrap();
     let db = Arc::new(db);
 
     let doc_name = "sample-doc";
