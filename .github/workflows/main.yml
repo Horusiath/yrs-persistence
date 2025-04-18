@@ -33,6 +33,9 @@ jobs:
   test-lmdb:
     runs-on: ${{ matrix.os }}
     needs: build
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest ]
     steps:
       - name: checkout sources
         uses: actions/checkout@v2
@@ -43,6 +46,9 @@ jobs:
   test-rocksdb:
     runs-on: ${{ matrix.os }}
     needs: build
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest ]
     steps:
       - name: checkout sources
         uses: actions/checkout@v2
