@@ -5,3 +5,6 @@ members = [
     "yrs-lmdb",
     "yrs-rocksdb",
 ]
+
+[workspace.dependencies]
+yrs = { version = "0.23", features = ["sync"] }

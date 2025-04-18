@@ -17,7 +17,6 @@ yrs-kvstore = { version = "0.3", path = "../yrs-kvstore" }
 lmdb-rs = { version = "0.7" }
 
 [dev-dependencies]
-yrs = "0.19"
 criterion = "0.5"
 tempdir = "0.3"
 

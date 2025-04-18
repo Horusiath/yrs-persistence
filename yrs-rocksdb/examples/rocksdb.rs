@@ -1,8 +1,8 @@
 use rocksdb::TransactionDB;
 use std::sync::Arc;
 use std::time::Instant;
-use yrs::encoding::read::{Cursor, Read};
-use yrs::{Doc, Text, Transact};
+use yrs_rocksdb::store::yrs::encoding::read::{Cursor, Read};
+use yrs_rocksdb::store::yrs::{Doc, Text, Transact};
 use yrs_kvstore::DocOps;
 use yrs_rocksdb::RocksDBStore;
 
@@ -89,7 +89,7 @@ enum TextOp {
 
 fn read_input(fpath: &str) -> Vec<TextOp> {
     use std::fs::File;
-    use yrs::updates::decoder::DecoderV1;
+    use yrs_rocksdb::store::yrs::updates::decoder::DecoderV1;
 
     let mut f = File::open(fpath).unwrap();
     let mut buf = Vec::new();

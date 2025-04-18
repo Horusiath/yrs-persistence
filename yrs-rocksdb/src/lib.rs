@@ -220,8 +220,8 @@ mod test {
     use std::path::Path;
     use std::sync::Arc;
     use tempdir::TempDir;
-    use yrs::{Doc, GetString, ReadTxn, Text, Transact};
-    use yrs_kvstore::DocOps;
+    use crate::store::yrs::{Doc, GetString, ReadTxn, Text, Transact};
+    use crate::store::DocOps;
 
     fn init_env<P: AsRef<Path>>(dir: P) -> TransactionDB {
         let db = TransactionDB::open_default(dir).unwrap();

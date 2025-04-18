@@ -3,8 +3,8 @@ use std::sync::Arc;
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use lmdb_rs::core::DbCreate;
 use lmdb_rs::Environment;
-use yrs::encoding::read::{Cursor, Read};
-use yrs::{uuid_v4, Doc, Text, Transact};
+use yrs_lmdb::store::yrs::encoding::read::{Cursor, Read};
+use yrs_lmdb::store::yrs::{uuid_v4, Doc, Text, Transact};
 
 use yrs_kvstore::DocOps;
 use yrs_lmdb::LmdbStore;
@@ -128,7 +128,7 @@ fn apply_ops(doc: &Doc, ops: Vec<TextOp>) {
 
 fn read_input(fpath: &str) -> Vec<TextOp> {
     use std::fs::File;
-    use yrs::updates::decoder::DecoderV1;
+    use yrs_lmdb::store::yrs::updates::decoder::DecoderV1;
 
     let mut f = File::open(fpath).unwrap();
     let mut buf = Vec::new();

@@ -262,7 +262,7 @@ mod test {
     use std::path::Path;
     use std::sync::Arc;
     use tempdir::TempDir;
-    use yrs::{Doc, GetString, ReadTxn, Text, Transact};
+    use crate::store::yrs::{Doc, GetString, ReadTxn, Text, Transact};
 
     fn init_env<P: AsRef<Path>>(dir: P) -> Environment {
         let env = Environment::new()

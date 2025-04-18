@@ -38,6 +38,8 @@
 pub mod error;
 pub mod keys;
 
+pub use yrs;
+
 use crate::error::Error;
 use crate::keys::{
     doc_oid_name, key_doc, key_doc_end, key_doc_start, key_meta, key_meta_end, key_meta_start,
